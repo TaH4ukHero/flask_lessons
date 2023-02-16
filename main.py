@@ -2,91 +2,113 @@ from flask import Flask, url_for
 
 app = Flask(__name__)
 
-
-@app.route('/')
-def mission():
-    return 'Миссия колонизации Марса'
-
-
-@app.route('/index')
-def index():
-    return 'И на Марсе будут яблони цвести!'
-
-
-@app.route('/promotion')
-def promotion():
-    return '''<h1>Человечество вырастает из детства.<br>
-
-Человечеству мала одна планета.<br>
-
-Мы сделаем обитаемыми безжизненные пока планеты.<br>
-
-И начнем с Марса!<br>
-
-Присоединяйся!</h1>'''
-
-
-@app.route('/image_mars')
-def image_mars():
+@app.route('/astronaut_selection', methods=['POST', 'GET'])
+def form_sample():
     return f'''<!doctype html>
-               <html lang="en">
-                    <head>
+                    <html lang="en">
+                      <head>
                         <meta charset="utf-8">
-                        <title> Привет, марс </title>
-                        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-                        <link rel="stylesheet" type="text/css" href={url_for("static", filename="css/style.css")}>
-                    </head>
-                    <body>
-                        <h1> Жди нас, Марс! </h1>
-                        <img src={url_for("static", filename="img/MARS.jpg")}>
-                        <div class="alert alert-primary" role="alert">
-                            Человечество вырастает из детства.
+                        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                        <link rel="stylesheet"
+                        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+                        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+                        crossorigin="anonymous">
+                        <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
+                        <title>Отбор астронавтов</title>
+                      </head>
+                      <body>
+                        <div>
+                            <form class="login_form" method="post">
+                                <input type="surname" class="form-control" id="surname" aria-describedby="surnameHelp" placeholder="Фамилия" name="surname">
+                                <input type="name" class="form-control" id="name" placeholder="Имя" name="name">
+                                <input type="email" class="form-control" id="email" placeholder="Email" email="email">
+                                <div class="form-group">
+                                    <label for="classSelect">Образование</label>
+                                    <select class="form-control" id="classSelect" name="class">
+                                      <option>Начальное</option>
+                                      <option>Среднее</option>
+                                      <option>Высшее</option>
+                                    </select>
+                                 </div>
+                                <div class="form-group">
+                                    <label for="form-check">Выбор основной профессии</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="first" value="profession" checked>
+                                      <label class="form-check-label" for="first">
+                                        Инженер-Исследователь
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="second" value="profession" checked>
+                                      <label class="form-check-label" for="second">
+                                        Инженер-строитель
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="third" value="profession" checked>
+                                      <label class="form-check-label" for="third">
+                                        Пилот
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="fourth" value="profession" checked>
+                                      <label class="form-check-label" for="fourth">
+                                        Метереолорог
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="fivth" value="profession" checked>
+                                      <label class="form-check-label" for="fivth">
+                                        Инженер по жизниобеспечению
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="sixth" value="profession" checked>
+                                      <label class="form-check-label" for="sixth">
+                                        Инженер по радиционной защите
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="seventh" value="profession" checked>
+                                      <label class="form-check-label" for="seventh">
+                                        Врач
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="profession" id="eightth" value="profession" checked>
+                                      <label class="form-check-label" for="eightth">
+                                        Экзобиолог
+                                      </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="form-check">Пол</label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="sex" id="male" value="male" checked>
+                                          <label class="form-check-label" for="male">
+                                            Мужской
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="sex" id="female" value="female">
+                                          <label class="form-check-label" for="female">
+                                            Женский
+                                          </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="about">Мотивация</label>
+                                    <textarea class="form-control" id="about" rows="3" name="about"></textarea>
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="acceptRules" name="accept">
+                                    <label class="form-check-label" for="acceptRules">Готов остаться на Марсе?</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </form>
                         </div>
-                        <div class="alert alert-secondary" role="alert">
-                            Человечеству мала одна планета.
-                        </div>
-                        <div class="alert alert-success" role="alert">
-                            Мы сделаем обитаемыми безжизненные пока планеты.
-                        </div>
-                        <div class="alert alert-danger" role="alert">
-                            И начнем с Марса!
-                        </div>
-                        <div class="alert alert-warning" role="alert">
-                            Присоединяйся!
-                        </div>
-                    </body>
-                </html>'''
-
-
-@app.route('/promotion_page')
-def promotion_page():
-    return f'''<!doctype html>
-                   <html lang="en">
-                        <head>
-                            <meta charset="utf-8">
-                            <title> Привет, марс </title>
-                            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-                            <link rel="stylesheet" type="text/css" href={url_for("static", filename="css/style.css")}>
-                        </head>
-                        <body>
-                            <h1> Жди нас, Марс! </h1>
-                            <img src={url_for("static", filename="img/MARS.jpg")}>
-                            <div class="alert alert-primary" role="alert">
-                            Человечество вырастает из детства.
-                            </div>
-                            <div class="alert alert-secondary" role="alert">
-                            Человечеству мала одна планета.
-                            </div>
-                            <div class="alert alert-success" role="alert">
-                            Мы сделаем обитаемыми безжизненные пока планеты.
-                            </div>
-                            <div class="alert alert-danger" role="alert">
-                            И начнем с Марса!
-                            </div>
-                            <div class="alert alert-warning" role="alert">
-                            Присоединяйся!
-                            </div>
-                        </body>'''
+                      </body>
+                    </html>'''
 
 
 if __name__ == '__main__':
