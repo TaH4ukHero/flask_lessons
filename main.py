@@ -1,6 +1,8 @@
-from flask import Flask, url_for
+from flask import Flask
 
 app = Flask(__name__)
+
+
 @app.route('/choice/<planet_name>')
 def form_sample(planet_name):
     return f'''<!doctype html>
