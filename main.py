@@ -1,23 +1,24 @@
 from flask import Flask, render_template
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = 'g'
 
+class LoginForm(FlaskForm):
+    id_astro = StringField('', validators=[DataRequired()])
+    password_astro = PasswordField('', validators=[DataRequired()])
+    id_captain = StringField('', validators=[DataRequired()])
+    password_captain = PasswordField('', validators=[DataRequired()])
+    submit = SubmitField('Доступ')
 
-@app.route('/answer')
-@app.route('/auto_answer')
-def answer():
-    data = {
-        "title": "Auto Answer",
-        "Surname": "Kosov",
-        "Name": "Mikhail",
-        "Education": "Middle",
-        "Profession": "Coder",
-        "Sex": "Male",
-        "Motivation": "Earn to much money",
-        "Ready": "Yes"
-    }
-    return render_template("auto_answer.html", **data)
-
+@app.route('/login')
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return
+    return render_template("double_protection.html", form=form, title='Авторизация')
 
 if __name__ == '__main__':
     app.run(port=8000, host='127.0.0.1')
