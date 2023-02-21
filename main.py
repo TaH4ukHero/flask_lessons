@@ -3,10 +3,9 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/distribution')
-def distribution():
-    data = [str(i) for i in range(2, 10)]
-    return render_template('by_cabins.html', data=data)
+@app.route('/table/<sex>/<int:age>')
+def table(sex, age):
+    return render_template('table.html', sex=sex, age=age)
 
 
 if __name__ == '__main__':

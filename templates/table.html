@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% set male_colors = ['#00FFFF',
+                            '#E0FFFF',
+                            '#AFEEEE',
+                            '#7FFFD4',
+                            '#40E0D0',
+                            '#48D1CC',
+                            '#00CED1',
+                            '#4682B4',
+                            '#B0C4DE']%}
+    {% set female_colors = ['#EE82EE',
+                            '#DA70D6',
+                            '#AFEEEE',
+                            '#FF00FF',
+                            '#FF00FF',
+                            '#BA55D3',
+                            '#9370DB',
+                            '#8A2BE2',
+                            '#9400D3']%}
+    {% if age > 21 %}
+    {% set img = "img/adult_alien.png" %}
+    {% set size = (232, 312) %}
+    {% else %}
+    {% set img = "img/young_alien.png" %}
+    {% set size = (231, 306) %}
+    {% endif %}
+
+    <h2> Оформление каюты </h2>
+    <table class="table">
+        <tr>
+            <td style="background:gray">
+                цвет стен
+            </td>
+            <td style="background:gray">
+                Эмблема
+            </td>
+        </tr>
+        {% if sex == "male" %}
+        <tr>
+            <td style="background:{{ male_colors | random }}"></td>
+            <td><img src="{{ url_for('static', filename=img)}}"></td>
+        </tr>
+        {% else %}
+            <td style="background:{{ female_colors | random }}"></td>
+            <td><img src="{{ url_for('static', filename=img)}}"></td>
+        {% endif %}
+
+    </table>
+{% endblock %}
