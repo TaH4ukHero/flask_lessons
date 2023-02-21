@@ -1,26 +1,12 @@
 from flask import Flask, render_template
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = 'g'
 
 
-class LoginForm(FlaskForm):
-    id_astro = StringField('', validators=[DataRequired()])
-    password_astro = PasswordField('', validators=[DataRequired()])
-    id_captain = StringField('', validators=[DataRequired()])
-    password_captain = PasswordField('', validators=[DataRequired()])
-    submit = SubmitField('Доступ')
-
-
-@app.route('/login')
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        return
-    return render_template("double_protection.html", form=form, title='Авторизация')
+@app.route('/distribution')
+def distribution():
+    data = [str(i) for i in range(2, 10)]
+    return render_template('by_cabins.html', data=data)
 
 
 if __name__ == '__main__':
