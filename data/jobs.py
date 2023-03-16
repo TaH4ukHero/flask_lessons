@@ -5,7 +5,7 @@ from sqlalchemy import orm
 
 
 class Jobs(SqlAlchemyBase):
-    __tablename__ = 'users'
+    __tablename__ = 'jobs'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
