@@ -67,3 +67,9 @@ def get_news(job_id: int):
             "title": news.to_dict(only='title')
         }
     )
+
+
+if __name__ == '__main__':
+    db_session.global_init('db/blogs.db')
+
+    app.run()
