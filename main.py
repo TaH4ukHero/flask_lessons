@@ -1,47 +1,22 @@
-from flask import Flask
-
+from flask import Flask, render_template
 from data import db_session
+from data.db_session import create_session, global_init
 from data.jobs import Jobs
 from data.users import User
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
-
-def add_astro():
-    db_sess = db_session.create_session()
-    data = [['Scott, Ridley, 21, captain, research engineer, module_1, scott_chief@mars.org'],
-            ['Dwayne, Johnson, 24, member, pilot, module_2, johnson_@mars.org'],
-            ['Arthur, Hamilton, 28, member, engineer, module_3, Hamilton_@mars.org']]
-    for i in data:
-        i = i[0].split(', ')
-        user = User()
-        user.surname = i[0]
-        user.name = i[1]
-        user.age = int(i[2])
-        user.position = i[3]
-        user.speciality = i[4]
-        user.address = i[5]
-        user.email = i[-1]
-        db_sess.add(user)
-        db_sess.commit()
-
-
-def add_job():
-    db_sess = db_session.create_session()
-    job = Jobs()
-    job.team_leader = 1
-    job.job = 'deployment of residential modules 1 and 2'
-    job.work_size = 15
-    job.collaborators = '2, 3'
-    job.is_finished = False
-    db_sess.add(job)
-    db_sess.commit()
+@app.route('/')
+def catalog_of_jobs():
+    db_sess = create_session()
+    data = db_sess.query(Jobs).all()
+    return render_template('catalog_of_jobs.html', data=data)
 
 def main():
+    # global_init(input())
     db_session.global_init('db/blogs.db')
-    add_job()
-    # app.run()
+    app.run()
 
 
 if __name__ == '__main__':

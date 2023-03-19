@@ -27,7 +27,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     jobs = orm.relationship("Jobs", back_populates='user')
 
     def __repr__(self):
-        return f"<User> {self.name} {self.email}"
+        return f"<Colonist> {self.id} {self.surname} {self.name}"
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)

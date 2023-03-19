@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+    {%set cnt = 1%}
+    <h1> Works log </h1>
+    {% for val in data %}
+    <h2> Action #{{ cnt }}</h2>
+    <table>
+        <tr>
+            <td style="background:#0D8800">
+                Title of job
+            </td>
+            <td style="background:#4AE83A">
+                Team leader
+            </td>
+            <td style="background:#0D8800">
+                Work size
+            </td>
+            <td style="background:#4AE83A">
+                Collaborators
+            </td>
+            <td style="background:#0D8800">
+                Is finished
+            </td>
+        </tr>
+        <tr>
+            <td style="background:#0D8800">
+                {{ val.job }}
+            </td>
+            <td style="background:#4AE83A">
+                {{ val.team_leader }}
+            </td>
+            <td style="background:#0D8800">
+                {{ val.work_size }}
+            </td>
+            <td style="background:#4AE83A">
+                {{ val.collaborators }}
+            </td>
+            <td style="background:#0D8800">
+                {{ val.is_finished }}
+            </td>
+        </tr>
+    </table>
+    {% set cnt = cnt + 1 %}
+    {% endfor %}
+{% endblock %}
